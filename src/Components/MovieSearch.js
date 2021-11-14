@@ -19,7 +19,7 @@ export default function MovieSearch() {
       });
       if (response) setMovies(response?.data?.movie_results);
     }
-    getSearch();
+    if (search !== "") getSearch();
   }, [search, setMovies]);
   function handleInputOnChange(e) {
     setSearch(e.target.value);

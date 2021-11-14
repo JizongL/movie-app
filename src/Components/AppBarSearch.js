@@ -35,18 +35,6 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   justifyContent: "center",
 }));
 
-// const ClearIconWrapper = styled("div")(({ theme }) => ({
-//   padding: theme.spacing(0, 2),
-//   height: "100%",
-//   position: "absolute",
-//   left: "94%",
-//   right: "10%",
-//   pointerEvents: "none",
-//   display: "flex",
-//   alignItems: "center",
-//   justifyContent: "center",
-// }));
-
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   "& .MuiInputBase-input": {
@@ -91,21 +79,19 @@ export default function AppBarSearch({ handleInputOnChange }) {
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
-            {/* {search !== "" && (
-              <ClearIconWrapper>
-                <IconButton onClick={() => setSearch("")}>
-                  <CancelPresentationIcon />
-                </IconButton>
-              </ClearIconWrapper>
-            )} */}
             <StyledInputBase
+              data-testid="search-input"
               placeholder="Search…"
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
         </Toolbar>
       </AppBar>
-      {search !== "" && !viewAllMovies && <SearchMenu />}
+      {search !== "" && !viewAllMovies && (
+        <div data-testid="search-menu">
+          <SearchMenu />
+        </div>
+      )}
     </Box>
   );
 }

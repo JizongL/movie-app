@@ -5,9 +5,9 @@ import MenuItem from "./MenuItem";
 import AppContext from "../context";
 import { Typography, Button } from "@mui/material";
 export default function SearchMenu() {
-  const { movies, setViewAllMovies } = useContext(AppContext);
+  const { search, movies, setViewAllMovies } = useContext(AppContext);
   const moviesItems = movies
-    .slice(0, 10)
+    ?.slice(0, 10)
     ?.map((movie) => (
       <MenuItem
         title={movie?.title}
@@ -20,7 +20,7 @@ export default function SearchMenu() {
     <Paper sx={{ maxWidth: "100%" }}>
       <MenuList>{moviesItems}</MenuList>
       <Typography align="center">
-        total: {movies.length} {movies.length > 1 ? "movies" : "movie"} found
+        total: {movies?.length} {movies?.length > 1 ? "movies" : "movie"} found
         <Button onClick={() => setViewAllMovies(true)}>view all results</Button>
       </Typography>
     </Paper>
