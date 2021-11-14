@@ -1,20 +1,31 @@
-import React, { useEffect, useState } from "react";
-import { Input, Container, Grid } from "@mui/material";
-import { movieSearchResultMap } from "./helpers";
+import React, { Fragment, useEffect, useState } from "react";
+import { Container, Grid } from "@mui/material";
+import AppBarSearch from "./Components/AppBarSearch";
+import MovieList from "./Components/MovieList";
+import MovieDetails from "./Components/MovieDetails";
 import axios from "axios";
 const URL_TEMP = "http://localhost:5000";
 export default function MovieSearch() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
-  async function getSearch() {
-    // const response = await axios.get('/search?title="matrix"');
-    const response = await axios.get(`${URL_TEMP}/search?title=${search}`, {
-      headers: { "Access-Control-Allow-Origin": "*" },
-    });
-    setMovies(response?.data?.movie_results);
-  }
+  const [openMovieDetails, setOpenMovieDetails] = React.useState(false);
+
+  const handleClickOpen = () => {
+    openMovieDetails(true);
+  };
+
+  const handleClose = () => {
+    setOpenMovieDetails(false);
+  };
 
   useEffect(() => {
+    async function getSearch() {
+      // const response = await axios.get('/search?title="matrix"');
+      const response = await axios.get(`${URL_TEMP}/search?title=${search}`, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
+      if (response) setMovies(response?.data?.movie_results);
+    }
     getSearch();
   }, [search]);
   function handleInputOnChange(e) {
@@ -22,9 +33,12 @@ export default function MovieSearch() {
   }
 
   return (
-    <div>
-      <Input onChange={handleInputOnChange} />
-      <ul className="users">{movieSearchResultMap(movies)}</ul>
-    </div>
+    <Fragment>
+      <AppBarSearch handleInputOnChange={handleInputOnChange} />
+      <MovieDetails open={openMovieDetails} handleClose={handleClose} />
+      <Container style={{ marginTop: 30 }}>
+        <Grid container>{search !== "" && <MovieList movies={movies} />}</Grid>
+      </Container>
+    </Fragment>
   );
 }
