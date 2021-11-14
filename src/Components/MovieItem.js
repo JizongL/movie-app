@@ -9,7 +9,6 @@ export default function MovieItems({ movies }) {
     useContext(AppContext);
 
   function handleMovieItemClick(e, imdb) {
-    console.log({ imdb });
     handleMovieModalClickOpen();
     setSelectedMovieimdb(imdb);
   }

@@ -5,10 +5,11 @@ import MovieList from "./MovieList";
 import MovieDetails from "./MovieDetails";
 import AppContext from "../context";
 import axios from "axios";
-// const URL_TEMP = "http://localhost:5000";
-const URL_TEMP = "";
+const URL_TEMP = "http://localhost:5000";
+// const URL_TEMP = "";
 export default function MovieSearch() {
-  const { search, setSearch, movies, setMovies } = useContext(AppContext);
+  const { viewAllMovies, search, setSearch, movies, setMovies } =
+    useContext(AppContext);
 
   useEffect(() => {
     async function getSearch() {
@@ -29,7 +30,9 @@ export default function MovieSearch() {
       <AppBarSearch handleInputOnChange={handleInputOnChange} />
       <MovieDetails />
       <Container style={{ maxHeight: "100vh", marginTop: 30 }}>
-        <Grid container>{search !== "" && <MovieList movies={movies} />}</Grid>
+        <Grid container>
+          {search !== "" && viewAllMovies && <MovieList movies={movies} />}
+        </Grid>
       </Container>
     </Fragment>
   );

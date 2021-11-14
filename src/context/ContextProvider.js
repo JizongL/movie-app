@@ -6,6 +6,7 @@ const ContextProvider = ({ children }) => {
   const [selectedMovieimdb, setSelectedMovieimdb] = useState("");
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
+  const [viewAllMovies, setViewAllMovies] = useState(false);
   const handleMovieModalClickOpen = () => {
     setOpenMovieDetails(true);
   };
@@ -24,6 +25,8 @@ const ContextProvider = ({ children }) => {
     setMovies,
     search,
     setSearch,
+    viewAllMovies,
+    setViewAllMovies,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;
