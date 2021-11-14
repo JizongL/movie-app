@@ -1,6 +1,16 @@
-# Getting Started with Create React App
+# Introduction
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This is a simple full stack application for users to keep up with movies and TV shows. In version 1,
+it allows user to search movies by names and check out the detail of each of the movies found. It is
+build with NodeJS, ExpressJS and ReactJs. React client is first built and then Node server is started
+and the client is being served by ExpressJs as static content.
+
+# Getting Started
+
+The recommand way to run this project is by using `docker-compose up`, make sure you have [installed docker](https://www.docker.com/?utm_source=google&utm_medium=cpc&utm_campaign=dockerhomepage&utm_content=namer&utm_term=dockerhomepage&utm_budget=growth&gclid=Cj0KCQiAhMOMBhDhARIsAPVml-EL5wV4L0a85P7lPdSyg_CBr8TUYGK_BLEL2L3f9iLd2MpCJWGj9sMaAjOnEALw_wcB), and configured it properly, you can read [this](https://docs.docker.com/desktop/mac/install/) for more details.
+
+Once Docker is ready, you can run `docker-compose up` in the root directory and it will create an image and container and build the cilent and start the nodejs server inside the container.
+it's mapped to the port `5000` in the host so you can access the application in the browers with `localhost:5000`
 
 ## Available Scripts
 
@@ -8,63 +18,32 @@ In the project directory, you can run:
 
 ### `yarn start`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+This command is for development mode, it first builds the react client and create a build folder in the root directory, then it starts the nodeJS server
+which serves the client build folder.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+`http://localhost:5000`
+
+### `yarn start-client`
+
+Or you may want to run the React client separately without build with this command.
+
+### `cd server && yarn start`
+
+This runs the nodeJS server separately for development purpose.
 
 ### `yarn test`
 
 Launches the test runner in the interactive watch mode.\
 See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
 
-### `yarn build`
+## API resource
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Movie data is provided by `RapidAPI.com`
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+The API URL is `https://rapidapi.com/amrelrafie/api/movies-tvshows-data-imdb`
 
 ## Learn More
 
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)

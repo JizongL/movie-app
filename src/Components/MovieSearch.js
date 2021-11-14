@@ -1,16 +1,14 @@
-import React, { Fragment, useEffect, useState, useContext } from "react";
+import React, { Fragment, useEffect, useContext } from "react";
 import { Container, Grid } from "@mui/material";
-import AppBarSearch from "./Components/AppBarSearch";
-import MovieList from "./Components/MovieList";
-import MovieDetails from "./Components/MovieDetails";
-import AppContext from "./context";
+import AppBarSearch from "./AppBarSearch";
+import MovieList from "./MovieList";
+import MovieDetails from "./MovieDetails";
+import AppContext from "../context";
 import axios from "axios";
-const URL_TEMP = "http://localhost:5000";
+// const URL_TEMP = "http://localhost:5000";
+const URL_TEMP = "";
 export default function MovieSearch() {
-  const [movies, setMovies] = useState([]);
-  const [search, setSearch] = useState("");
-  const { handleMovieModalClickOpen, openMovieDetails, setOpenMovieDetails } =
-    useContext(AppContext);
+  const { search, setSearch, movies, setMovies } = useContext(AppContext);
 
   useEffect(() => {
     async function getSearch() {
@@ -21,7 +19,7 @@ export default function MovieSearch() {
       if (response) setMovies(response?.data?.movie_results);
     }
     getSearch();
-  }, [search]);
+  }, [search, setMovies]);
   function handleInputOnChange(e) {
     setSearch(e.target.value);
   }
@@ -30,7 +28,7 @@ export default function MovieSearch() {
     <Fragment>
       <AppBarSearch handleInputOnChange={handleInputOnChange} />
       <MovieDetails />
-      <Container style={{ marginTop: 30 }}>
+      <Container style={{ maxHeight: "100vh", marginTop: 30 }}>
         <Grid container>{search !== "" && <MovieList movies={movies} />}</Grid>
       </Container>
     </Fragment>
