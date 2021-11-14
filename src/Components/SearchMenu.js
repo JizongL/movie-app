@@ -5,7 +5,7 @@ import MenuItem from "./MenuItem";
 import AppContext from "../context";
 import { Typography, Button } from "@mui/material";
 export default function SearchMenu() {
-  const { search, movies, setViewAllMovies } = useContext(AppContext);
+  const { movies, setViewAllMovies } = useContext(AppContext);
   const moviesItems = movies
     ?.slice(0, 10)
     ?.map((movie) => (
