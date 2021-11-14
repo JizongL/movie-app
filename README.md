@@ -5,6 +5,10 @@ it allows user to search movies by names and check out the detail of each of the
 build with NodeJS, ExpressJS and ReactJs. React client is first built and then Node server is started
 and the client is being served by ExpressJs as static content.
 
+# Demo URL
+
+This app is deployed to AWS fargate and you can view the [demo](http://3.94.158.145:5000/) here.
+
 # Getting Started
 
 The recommand way to run this project is by using `docker-compose up`, make sure you have [installed docker](https://www.docker.com/?utm_source=google&utm_medium=cpc&utm_campaign=dockerhomepage&utm_content=namer&utm_term=dockerhomepage&utm_budget=growth&gclid=Cj0KCQiAhMOMBhDhARIsAPVml-EL5wV4L0a85P7lPdSyg_CBr8TUYGK_BLEL2L3f9iLd2MpCJWGj9sMaAjOnEALw_wcB), and configured it properly, you can read [this](https://docs.docker.com/desktop/mac/install/) for more details.
