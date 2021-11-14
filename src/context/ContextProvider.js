@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import AppContext from ".";
 
 const ContextProvider = ({ children }) => {
   const [openMovieDetails, setOpenMovieDetails] = useState(false);
-
+  const [selectedMovieimdb, setSelectedMovieimdb] = useState("");
   const handleMovieModalClickOpen = () => {
-    console.log("ran open");
     setOpenMovieDetails(true);
   };
 
@@ -17,6 +16,8 @@ const ContextProvider = ({ children }) => {
     setOpenMovieDetails,
     handleMovieModalClickOpen,
     handleMovieModalClose,
+    selectedMovieimdb,
+    setSelectedMovieimdb,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

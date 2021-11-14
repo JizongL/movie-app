@@ -37,8 +37,7 @@ export default function MovieDetails({ open, handleClose }) {
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Subscribe</Button>
+          <Button onClick={handleMovieModalClose}>Close</Button>
         </DialogActions>
       </Dialog>
     </div>
