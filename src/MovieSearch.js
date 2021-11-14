@@ -1,22 +1,16 @@
-import React, { Fragment, useEffect, useState } from "react";
+import React, { Fragment, useEffect, useState, useContext } from "react";
 import { Container, Grid } from "@mui/material";
 import AppBarSearch from "./Components/AppBarSearch";
 import MovieList from "./Components/MovieList";
 import MovieDetails from "./Components/MovieDetails";
+import AppContext from "./context";
 import axios from "axios";
 const URL_TEMP = "http://localhost:5000";
 export default function MovieSearch() {
   const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
-  const [openMovieDetails, setOpenMovieDetails] = React.useState(false);
-
-  const handleClickOpen = () => {
-    openMovieDetails(true);
-  };
-
-  const handleClose = () => {
-    setOpenMovieDetails(false);
-  };
+  const { handleMovieModalClickOpen, openMovieDetails, setOpenMovieDetails } =
+    useContext(AppContext);
 
   useEffect(() => {
     async function getSearch() {
@@ -35,7 +29,7 @@ export default function MovieSearch() {
   return (
     <Fragment>
       <AppBarSearch handleInputOnChange={handleInputOnChange} />
-      <MovieDetails open={openMovieDetails} handleClose={handleClose} />
+      <MovieDetails />
       <Container style={{ marginTop: 30 }}>
         <Grid container>{search !== "" && <MovieList movies={movies} />}</Grid>
       </Container>

@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useContext } from "react";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
@@ -6,14 +6,20 @@ import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
-
+import AppContext from "../context";
 export default function MovieDetails({ open, handleClose }) {
+  const {
+    handleMovieModalClickOpen,
+    handleMovieModalClose,
+    openMovieDetails,
+    setOpenMovieDetails,
+  } = useContext(AppContext);
   return (
     <div>
       {/* <Button variant="outlined" onClick={handleClickOpen}>
         Open form dialog
       </Button> */}
-      <Dialog open={open} onClose={handleClose}>
+      <Dialog open={openMovieDetails} onClose={handleMovieModalClose}>
         <DialogTitle>Subscribe</DialogTitle>
         <DialogContent>
           <DialogContentText>
