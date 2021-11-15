@@ -6,10 +6,10 @@ import MovieDetails from "./ShowsDetails";
 import AppContext from "../context";
 import Config from "../config";
 import axios from "axios";
-
+import Slider from "./SlideBar";
 // Uncommented the first one for local dev development.
-const URL = Config.devApiUrl;
-// const URL = Config.dockerRunApi;
+// const URL = Config.devApiUrl;
+const URL = Config.dockerRunApi;
 
 export default function MovieSearch() {
   const {
@@ -48,6 +48,7 @@ export default function MovieSearch() {
       <MovieDetails />
       <Container style={{ maxHeight: "100vh", marginTop: 30 }}>
         <Grid container>{search !== "" && viewAllShows && <ShowsList />}</Grid>
+        {search === "" && <Slider />}
       </Container>
     </Fragment>
   );

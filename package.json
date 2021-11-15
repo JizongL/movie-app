@@ -13,14 +13,16 @@
     "@testing-library/user-event": "^12.1.10",
     "axios": "^0.24.0",
     "react": "^17.0.2",
+    "react-awesome-slider": "^4.1.0",
     "react-dom": "^17.0.2",
+    "react-image-gallery": "^1.2.7",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "web-vitals": "^1.0.1"
   },
   "scripts": {
     "start-client": "react-scripts start",
-    "start": "yarn run build && (cd server && yarn start)",
+    "start": "npm run build && (cd server && npm start)",
     "build": "react-scripts build",
     "test": "react-scripts test --silent --watchAll=false && (cd server && yarn test)",
     "eject": "react-scripts eject"

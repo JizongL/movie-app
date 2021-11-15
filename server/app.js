@@ -102,4 +102,31 @@ app.get("/search-tvshows", (req, res) => {
     });
 });
 
+app.get("/get-randoms", async (req, res) => {
+  const options = Utils.createOption({ type: "get-random-movies", page: "1" });
+  try {
+    const response = await axios.request(options);
+    const randomMoviesData = response.data.movie_results.slice(0, 4);
+    const randomImdbs = randomMoviesData.map((movie) => movie.imdb_id);
+    const imagesData = randomImdbs.map(async (imdb) => await getImage(imdb));
+    const imagesDataFinal = await Promise.all(imagesData);
+    res.json(imagesDataFinal);
+  } catch (e) {
+    res.json({ error: "can't get random movies" });
+  }
+});
+
+async function getImage(imdb) {
+  try {
+    const options = Utils.createOption({
+      type: "get-movies-images-by-imdb",
+      imdb: imdb,
+    });
+    const response = await axios.request(options);
+    return response.data;
+  } catch (e) {
+    return;
+  }
+}
+
 module.exports = app;

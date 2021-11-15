@@ -1,7 +1,7 @@
 import React from "react";
 import AppBarSearch from "../AppBarSearch";
-import MovieSearch from "../MovieSearch";
-import { render, fireEvent, cleanup } from "@testing-library/react";
+
+import { render, cleanup } from "@testing-library/react";
 
 import "@testing-library/jest-dom/extend-expect";
 

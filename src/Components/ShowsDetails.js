@@ -12,8 +12,8 @@ import Config from "../config";
 import axios from "axios";
 
 // Uncommented the first one for local dev development.
-const URL = Config.devApiUrl;
-// const URL = Config.dockerRunApi;
+// const URL = Config.devApiUrl;
+const URL = Config.dockerRunApi;
 
 const useStyles = makeStyles({
   root: {
@@ -83,14 +83,14 @@ export default function MovieDetails() {
           </Grid>
           <DialogContent>
             <Grid container>
-              <Grid item md="6">
+              <Grid item md={6}>
                 <img
                   alt="movie-poster"
                   className={classes.posterImage}
                   src={showImage?.poster}
                 />
               </Grid>
-              <Grid item md="6">
+              <Grid item md={6}>
                 <DialogContentText>
                   {movieDetails?.description}
                 </DialogContentText>
@@ -129,16 +129,18 @@ export default function MovieDetails() {
               </Grid>
             </Grid>
           </DialogContent>
-          <Grid md="12">
-            <DialogActions>
-              <Button
-                variant="outlined"
-                className={classes.backButton}
-                onClick={handleShowModalClose}
-              >
-                Back
-              </Button>
-            </DialogActions>
+          <Grid container>
+            <Grid item md={12}>
+              <DialogActions>
+                <Button
+                  variant="outlined"
+                  className={classes.backButton}
+                  onClick={handleShowModalClose}
+                >
+                  Back
+                </Button>
+              </DialogActions>
+            </Grid>
           </Grid>
         </Grid>
       </Dialog>
