@@ -1,8 +1,8 @@
 import React, { Fragment, useEffect, useContext } from "react";
 import { Container, Grid } from "@mui/material";
 import AppBarSearch from "./AppBarSearch";
-import MovieList from "./MovieList";
-import MovieDetails from "./MovieDetails";
+import ShowsList from "./ShowsList";
+import MovieDetails from "./ShowsDetails";
 import AppContext from "../context";
 import Config from "../config";
 import axios from "axios";
@@ -12,21 +12,34 @@ const URL = Config.devApiUrl;
 // const URL = Config.dockerRunApi;
 
 export default function MovieSearch() {
-  const { viewAllMovies, search, setSearch, movies, setMovies } =
-    useContext(AppContext);
+  const {
+    alignment,
+    setViewAllShows,
+    viewAllShows,
+    search,
+    setSearch,
+    setShows,
+  } = useContext(AppContext);
+  let searchEndpoint =
+    alignment === "movies" ? "search-movies" : "search-tvshows";
+  let dataKeyName = alignment === "movies" ? "movie_results" : "tv_results";
 
   useEffect(() => {
     async function getSearch() {
-      // const response = await axios.get('/search?title="matrix"');
-      const response = await axios.get(`${URL}/search?title=${search}`, {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
-      if (response) setMovies(response?.data?.movie_results);
+      const response = await axios.get(
+        `${URL}/${searchEndpoint}?title=${search}`,
+        {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        }
+      );
+
+      if (response) setShows(response?.data?.[dataKeyName]);
     }
     if (search !== "") getSearch();
-  }, [search, setMovies]);
+  }, [search, setShows, dataKeyName, searchEndpoint]);
   function handleInputOnChange(e) {
     setSearch(e.target.value);
+    setViewAllShows(false);
   }
 
   return (
@@ -34,9 +47,7 @@ export default function MovieSearch() {
       <AppBarSearch handleInputOnChange={handleInputOnChange} />
       <MovieDetails />
       <Container style={{ maxHeight: "100vh", marginTop: 30 }}>
-        <Grid container>
-          {search !== "" && viewAllMovies && <MovieList movies={movies} />}
-        </Grid>
+        <Grid container>{search !== "" && viewAllShows && <ShowsList />}</Grid>
       </Container>
     </Fragment>
   );

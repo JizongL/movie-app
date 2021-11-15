@@ -12,7 +12,7 @@ app.get("/ping", (req, res) => {
   res.send("healthy");
 });
 
-app.get("/images/:imdb_id", (req, res) => {
+app.get("/tv-images/:imdb_id", (req, res) => {
   const { imdb_id } = req.params;
   const options = Utils.createOption({
     type: "get-movies-images-by-imdb",
@@ -28,7 +28,7 @@ app.get("/images/:imdb_id", (req, res) => {
     });
 });
 
-app.get("/details/:imdb_id", (req, res) => {
+app.get("/tv-details/:imdb_id", (req, res) => {
   const { imdb_id } = req.params;
   const options = Utils.createOption({
     type: "get-movie-details",
@@ -44,9 +44,54 @@ app.get("/details/:imdb_id", (req, res) => {
     });
 });
 
-app.get("/search", (req, res) => {
+app.get("/movie-images/:imdb_id", (req, res) => {
+  const { imdb_id } = req.params;
+  const options = Utils.createOption({
+    type: "get-movies-images-by-imdb",
+    imdb: imdb_id,
+  });
+  axios
+    .request(options)
+    .then(function (response) {
+      res.json(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+});
+
+app.get("/movie-details/:imdb_id", (req, res) => {
+  const { imdb_id } = req.params;
+  const options = Utils.createOption({
+    type: "get-movie-details",
+    imdb: imdb_id,
+  });
+  axios
+    .request(options)
+    .then(function (response) {
+      res.json(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+});
+
+app.get("/search-movies", (req, res) => {
   const { title } = req.query;
   const options = Utils.createOption({ type: "get-movies-by-title", title });
+  axios
+    .request(options)
+    .then(function (response) {
+      res.json(response.data);
+    })
+    .catch(function (error) {
+      console.error(error);
+    });
+});
+
+app.get("/search-tvshows", (req, res) => {
+  const { title } = req.query;
+  const options = Utils.createOption({ type: "get-shows-by-title", title });
   axios
     .request(options)
     .then(function (response) {

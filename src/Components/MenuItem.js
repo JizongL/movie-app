@@ -6,19 +6,19 @@ import Typography from "@mui/material/Typography";
 import LocalMoviesIcon from "@mui/icons-material/LocalMovies";
 import AppContext from "../context";
 export default function MenuItems({ title, year, imdbId }) {
-  const { handleMovieModalClickOpen, setSelectedMovieimdb } =
+  const { handleShowModalClickOpen, setSelectedMovieimdb } =
     useContext(AppContext);
 
-  function handleMovieItemClick(e, imdbId) {
-    handleMovieModalClickOpen();
+  function handleShowItemClick(e, imdbId) {
+    handleShowModalClickOpen();
     setSelectedMovieimdb(imdbId);
   }
   return (
-    <MenuItem key={imdbId} onClick={(e) => handleMovieItemClick(e, imdbId)}>
+    <MenuItem key={imdbId} onClick={(e) => handleShowItemClick(e, imdbId)}>
       <ListItemIcon>
         <LocalMoviesIcon fontSize="small" />
       </ListItemIcon>
-      <ListItemText>{title}</ListItemText>
+      <ListItemText primary={title} secondary={year}></ListItemText>
       <Typography variant="body2" color="text.secondary">
         ...
       </Typography>

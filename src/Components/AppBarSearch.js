@@ -10,6 +10,8 @@ import MenuIcon from "@mui/icons-material/Menu";
 import SearchIcon from "@mui/icons-material/Search";
 import SearchMenu from "./SearchMenu";
 import AppContext from "../context";
+import MovieAndTvToggle from "./MovieAndTvToggle";
+
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: theme.shape.borderRadius,
@@ -53,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function AppBarSearch({ handleInputOnChange }) {
-  const { search, viewAllMovies } = useContext(AppContext);
+  const { search, viewAllShows } = useContext(AppContext);
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar style={{ background: "#2E3B55" }} position="static">
@@ -87,7 +89,8 @@ export default function AppBarSearch({ handleInputOnChange }) {
           </Search>
         </Toolbar>
       </AppBar>
-      {search !== "" && !viewAllMovies && (
+      <MovieAndTvToggle />
+      {search !== "" && !viewAllShows && (
         <div data-testid="search-menu">
           <SearchMenu />
         </div>
