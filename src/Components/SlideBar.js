@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from "react";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
-// import ImageGallery from "react-image-gallery";
 import Config from "../config";
 import axios from "axios";
 import AppContext from "../context";
@@ -35,12 +34,6 @@ export default function Slider() {
     .map((movieUrl, index) => {
       return <div key={index} data-src={movieUrl}></div>;
     });
-  //   const ImagesForSlide = imageData
-  //     ?.filter((movieUrl) => movieUrl !== "")
-  //     .map((movieUrl) => {
-  //       return { original: movieUrl, thumbnail: movieUrl };
-  //     });
-  //   console.log(ImagesForSlide);
+
   return <AwesomeSlider>{ImagesForSlide}</AwesomeSlider>;
-  //   return <ImageGallery items={ImagesForSlide} />;
 }
