@@ -5,23 +5,25 @@ import MenuItem from "./MenuItem";
 import AppContext from "../context";
 import { Typography, Button } from "@mui/material";
 export default function SearchMenu() {
-  const { movies, setViewAllMovies } = useContext(AppContext);
-  const moviesItems = movies
+  const { shows, alignment, setViewAllShows } = useContext(AppContext);
+  const showsItems = shows
     ?.slice(0, 10)
-    ?.map((movie) => (
+    ?.map((show) => (
       <MenuItem
-        title={movie?.title}
-        year={movie?.year}
-        imdbId={movie.imdb_id}
+        title={show?.title}
+        year={alignment === "movies" ? show?.year : show.release_date}
+        imdbId={show.imdb_id}
       />
     ));
-
+  function handleSetViewAll() {
+    setViewAllShows(true);
+  }
   return (
     <Paper sx={{ maxWidth: "100%" }}>
-      <MenuList>{moviesItems}</MenuList>
+      <MenuList>{showsItems}</MenuList>
       <Typography align="center">
-        total: {movies?.length} {movies?.length > 1 ? "movies" : "movie"} found
-        <Button onClick={() => setViewAllMovies(true)}>view all results</Button>
+        total: {shows?.length} {shows?.length > 1 ? "movies" : "movie"} found
+        <Button onClick={handleSetViewAll}>view all results</Button>
       </Typography>
     </Paper>
   );

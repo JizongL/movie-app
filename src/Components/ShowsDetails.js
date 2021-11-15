@@ -37,37 +37,43 @@ const useStyles = makeStyles({
 
 export default function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState(null);
-  const [movieImage, setMovieImage] = useState(null);
+  const [showImage, setShowImage] = useState(null);
   const classes = useStyles();
-  const { handleMovieModalClose, openMovieDetails, selectedMovieimdb } =
+  const { handleShowModalClose, openShowDetails, selectedMovieimdb } =
     useContext(AppContext);
 
   useEffect(() => {
-    async function getMovieImages() {
-      const response = await axios.get(`${URL}/images/${selectedMovieimdb}`, {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
-      if (response) setMovieImage(response?.data);
+    async function getShowImages() {
+      const response = await axios.get(
+        `${URL}/movie-images/${selectedMovieimdb}`,
+        {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        }
+      );
+      if (response) setShowImage(response?.data);
     }
-    if (openMovieDetails) getMovieImages();
-  }, [selectedMovieimdb, openMovieDetails]);
+    if (openShowDetails) getShowImages();
+  }, [selectedMovieimdb, openShowDetails]);
 
   useEffect(() => {
     async function getMovieDetails() {
-      const response = await axios.get(`${URL}/details/${selectedMovieimdb}`, {
-        headers: { "Access-Control-Allow-Origin": "*" },
-      });
+      const response = await axios.get(
+        `${URL}/movie-details/${selectedMovieimdb}`,
+        {
+          headers: { "Access-Control-Allow-Origin": "*" },
+        }
+      );
 
       if (response) setMovieDetails(response?.data);
     }
-    if (openMovieDetails) getMovieDetails();
-  }, [selectedMovieimdb, openMovieDetails]);
+    if (openShowDetails) getMovieDetails();
+  }, [selectedMovieimdb, openShowDetails]);
   return (
     <div>
       <Dialog
         fullScreen={true}
-        open={openMovieDetails}
-        onClose={handleMovieModalClose}
+        open={openShowDetails}
+        onClose={handleShowModalClose}
       >
         <Grid container className={classes.root}>
           <Grid alignSelf="center" item md={12}>
@@ -81,7 +87,7 @@ export default function MovieDetails() {
                 <img
                   alt="movie-poster"
                   className={classes.posterImage}
-                  src={movieImage?.poster}
+                  src={showImage?.poster}
                 />
               </Grid>
               <Grid item md="6">
@@ -92,7 +98,7 @@ export default function MovieDetails() {
                 <img
                   alt="movie-fan-art"
                   className={classes.posterImage}
-                  src={movieImage?.fanart}
+                  src={showImage?.fanart}
                 />
                 <DialogContentText>{movieDetails?.directors}</DialogContentText>
 
@@ -128,7 +134,7 @@ export default function MovieDetails() {
               <Button
                 variant="outlined"
                 className={classes.backButton}
-                onClick={handleMovieModalClose}
+                onClick={handleShowModalClose}
               >
                 Back
               </Button>

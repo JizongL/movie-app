@@ -2,31 +2,37 @@ import React, { useState } from "react";
 import AppContext from ".";
 
 const ContextProvider = ({ children }) => {
-  const [openMovieDetails, setOpenMovieDetails] = useState(false);
+  const [openShowDetails, setOpenShowDetails] = useState(false);
   const [selectedMovieimdb, setSelectedMovieimdb] = useState("");
-  const [movies, setMovies] = useState([]);
+  const [shows, setShows] = useState([]);
+  const [tv, setTv] = useState([]);
   const [search, setSearch] = useState("");
-  const [viewAllMovies, setViewAllMovies] = useState(false);
-  const handleMovieModalClickOpen = () => {
-    setOpenMovieDetails(true);
+  const [alignment, setAlignment] = React.useState("tv");
+  const [viewAllShows, setViewAllShows] = useState(false);
+  const handleShowModalClickOpen = () => {
+    setOpenShowDetails(true);
   };
 
-  const handleMovieModalClose = () => {
-    setOpenMovieDetails(false);
+  const handleShowModalClose = () => {
+    setOpenShowDetails(false);
   };
   const context = {
-    openMovieDetails,
-    setOpenMovieDetails,
-    handleMovieModalClickOpen,
-    handleMovieModalClose,
+    openShowDetails,
+    setOpenShowDetails,
+    handleShowModalClickOpen,
+    handleShowModalClose,
     selectedMovieimdb,
     setSelectedMovieimdb,
-    movies,
-    setMovies,
+    shows,
+    setShows,
     search,
     setSearch,
-    viewAllMovies,
-    setViewAllMovies,
+    viewAllShows,
+    setViewAllShows,
+    alignment,
+    setAlignment,
+    tv,
+    setTv,
   };
 
   return <AppContext.Provider value={context}>{children}</AppContext.Provider>;

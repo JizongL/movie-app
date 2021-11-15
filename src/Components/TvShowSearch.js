@@ -1,7 +1,7 @@
 import React, { Fragment, useEffect, useContext } from "react";
 import { Container, Grid } from "@mui/material";
 import AppBarSearch from "./AppBarSearch";
-import ShowsList from "./ShowsList";
+import MovieList from "./ShowsList";
 import MovieDetails from "./ShowsDetails";
 import AppContext from "../context";
 import Config from "../config";
@@ -12,34 +12,21 @@ const URL = Config.devApiUrl;
 // const URL = Config.dockerRunApi;
 
 export default function MovieSearch() {
-  const {
-    alignment,
-    setViewAllShows,
-    viewAllShows,
-    search,
-    setSearch,
-    setShows,
-  } = useContext(AppContext);
-  let searchEndpoint =
-    alignment === "movies" ? "search-movies" : "search-tvshows";
-  let dataKeyName = alignment === "movies" ? "movie_results" : "tv_results";
+  const { alignment, viewAllMovies, search, setSearch, tv, setTv } =
+    useContext(AppContext);
 
   useEffect(() => {
     async function getSearch() {
-      const response = await axios.get(
-        `${URL}/${searchEndpoint}?title=${search}`,
-        {
-          headers: { "Access-Control-Allow-Origin": "*" },
-        }
-      );
-
-      if (response) setShows(response?.data?.[dataKeyName]);
+      // const response = await axios.get('/search?title="matrix"');
+      const response = await axios.get(`${URL}/search-tv?title=${search}`, {
+        headers: { "Access-Control-Allow-Origin": "*" },
+      });
+      if (response) setTv(response?.data?.movie_results);
     }
     if (search !== "") getSearch();
-  }, [search, setShows, dataKeyName, searchEndpoint]);
+  }, [search, setMovies]);
   function handleInputOnChange(e) {
     setSearch(e.target.value);
-    setViewAllShows(false);
   }
 
   return (
@@ -47,7 +34,7 @@ export default function MovieSearch() {
       <AppBarSearch handleInputOnChange={handleInputOnChange} />
       <MovieDetails />
       <Container style={{ maxHeight: "100vh", marginTop: 30 }}>
-        <Grid container>{search !== "" && viewAllShows && <ShowsList />}</Grid>
+        <Grid container>{search !== "" && viewAllMovies && <MovieList />}</Grid>
       </Container>
     </Fragment>
   );
