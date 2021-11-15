@@ -87,15 +87,6 @@ export default function AppBarSearch({ handleInputOnChange }) {
               inputProps={{ "aria-label": "search" }}
             />
           </Search>
-          {/* <IconButton
-            size="large"
-            edge="start"
-            // color="inherit"
-            aria-label="open drawer"
-            sx={{ mr: 2 }}
-          > */}
-
-          {/* </IconButton> */}
         </Toolbar>
       </AppBar>
       <MovieAndTvToggle />

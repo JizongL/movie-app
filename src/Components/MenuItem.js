@@ -18,9 +18,7 @@ export default function MenuItems({ title, year, imdbId }) {
       <ListItemIcon>
         <LocalMoviesIcon fontSize="small" />
       </ListItemIcon>
-      <ListItemText primary={title} secondary={year}>
-        {/* {title} {year} */}
-      </ListItemText>
+      <ListItemText primary={title} secondary={year}></ListItemText>
       <Typography variant="body2" color="text.secondary">
         ...
       </Typography>
