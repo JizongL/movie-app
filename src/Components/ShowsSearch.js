@@ -4,12 +4,8 @@ import AppBarSearch from "./AppBarSearch";
 import ShowsList from "./ShowsList";
 import MovieDetails from "./ShowsDetails";
 import AppContext from "../context";
-import Config from "../config";
 import axios from "axios";
 import Slider from "./SlideBar";
-// Uncommented the first one for local dev development.
-// const URL = Config.devApiUrl;
-const URL = Config.dockerRunApi;
 
 export default function MovieSearch() {
   const {
@@ -19,6 +15,7 @@ export default function MovieSearch() {
     search,
     setSearch,
     setShows,
+    URL,
   } = useContext(AppContext);
   let searchEndpoint =
     alignment === "movies" ? "search-movies" : "search-tvshows";
@@ -36,7 +33,7 @@ export default function MovieSearch() {
       if (response) setShows(response?.data?.[dataKeyName]);
     }
     if (search !== "") getSearch();
-  }, [search, setShows, dataKeyName, searchEndpoint]);
+  }, [search, setShows, dataKeyName, searchEndpoint, URL]);
   function handleInputOnChange(e) {
     setSearch(e.target.value);
     setViewAllShows(false);

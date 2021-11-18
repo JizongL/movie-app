@@ -1,18 +1,17 @@
 import React, { useEffect, useState, useContext } from "react";
 import AwesomeSlider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
-import Config from "../config";
 import axios from "axios";
 import AppContext from "../context";
 
 // Uncommented the first one for local dev development.
 // const URL = Config.devApiUrl;
-const URL = Config.dockerRunApi;
+//const URL = Config.dockerRunApi;
 
 export default function Slider() {
   const [firstFiveMoviesImages, setRandomMoviesImages] = useState([]);
   const [imageData, setImageData] = useState([]);
-  const { search, setShows } = useContext(AppContext);
+  const { search, setShows, URL } = useContext(AppContext);
   useEffect(() => {
     async function getRandom() {
       const response = await axios.get(`${URL}/get-randoms`, {
@@ -22,7 +21,7 @@ export default function Slider() {
       if (response) setRandomMoviesImages(response?.data);
     }
     if (search === "") getRandom();
-  }, [search, setShows]);
+  }, [search, setShows, URL]);
   useEffect(() => {
     if (firstFiveMoviesImages?.length > 0) {
       const movieImages = firstFiveMoviesImages?.map((movie) => movie?.poster);

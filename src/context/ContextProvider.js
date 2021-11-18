@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import AppContext from ".";
+import Config from "../config";
+require("dotenv").config();
+
+const { NODE_ENV } = process.env;
+const URL = NODE_ENV === "production" ? Config.dockerRunApi : Config.devApiUrl;
 
 const ContextProvider = ({ children }) => {
   const [openShowDetails, setOpenShowDetails] = useState(false);
@@ -17,6 +22,7 @@ const ContextProvider = ({ children }) => {
     setOpenShowDetails(false);
   };
   const context = {
+    URL,
     openShowDetails,
     setOpenShowDetails,
     handleShowModalClickOpen,

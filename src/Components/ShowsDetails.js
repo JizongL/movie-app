@@ -8,12 +8,7 @@ import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import AppContext from "../context";
 import { makeStyles } from "@mui/styles";
-import Config from "../config";
 import axios from "axios";
-
-// Uncommented the first one for local dev development.
-// const URL = Config.devApiUrl;
-const URL = Config.dockerRunApi;
 
 const useStyles = makeStyles({
   root: {
@@ -39,7 +34,7 @@ export default function MovieDetails() {
   const [movieDetails, setMovieDetails] = useState(null);
   const [showImage, setShowImage] = useState(null);
   const classes = useStyles();
-  const { handleShowModalClose, openShowDetails, selectedMovieimdb } =
+  const { handleShowModalClose, openShowDetails, selectedMovieimdb, URL } =
     useContext(AppContext);
 
   useEffect(() => {
@@ -53,7 +48,7 @@ export default function MovieDetails() {
       if (response) setShowImage(response?.data);
     }
     if (openShowDetails) getShowImages();
-  }, [selectedMovieimdb, openShowDetails]);
+  }, [selectedMovieimdb, openShowDetails, URL]);
 
   useEffect(() => {
     async function getMovieDetails() {
@@ -67,7 +62,7 @@ export default function MovieDetails() {
       if (response) setMovieDetails(response?.data);
     }
     if (openShowDetails) getMovieDetails();
-  }, [selectedMovieimdb, openShowDetails]);
+  }, [selectedMovieimdb, openShowDetails, URL]);
   return (
     <div>
       <Dialog
